@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +32,14 @@ public class StudentController {
 	public StudentController(StudentService service) {
 		this.service = service;
 	}
+	
 
 	@GetMapping
 	@ResponseBody
 	public Page<Student> findAll(Pageable pageable){
 		return this.service.findAll(pageable);
 	}
+	
 	
 	@GetMapping("/all")
 	@ResponseBody
@@ -65,6 +69,19 @@ public class StudentController {
 		
 		return new ResponseEntity<>(savedStudent, HttpStatus.OK);
 	}
+	
+	@GetMapping("/sp/{saludo}")
+	@ResponseBody
+	public List <Object[]> saludo(@PathVariable(value = "saludo") String saludo) {
+		return this.service.sp_student(saludo);
+	}
+	
+	@GetMapping("/cursor/{cursor}/{age}")
+	@ResponseBody
+	public List <Object[]> getStudendAge(@PathVariable(value = "cursor") String cursor, @PathVariable(value="age") Integer age) {
+		return this.service.sp_student(cursor, age);
+	}
+	
 	
 
 }

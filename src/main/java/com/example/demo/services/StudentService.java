@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,6 +20,10 @@ public interface StudentService {
 	Student update(Integer id, Student student);
 	
 	Student findById(Integer id);
+	
+	List <Object[]> sp_student(String saludo);
+	
+	List <Object[]> sp_student(String cursor, Integer age);
 	
 
 }

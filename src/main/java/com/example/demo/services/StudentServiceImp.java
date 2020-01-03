@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -56,6 +57,16 @@ public class StudentServiceImp implements StudentService{
 			
 		}
 		return optionalStudent.get();
+	}
+
+	@Override
+	public List<Object[]> sp_student(String saludo) {
+		return repository.sp_student(saludo);
+	}
+
+	@Override
+	public List<Object[]> sp_student(String cursor, Integer age) {
+		return repository.sp_cursor(cursor, age);
 	}
 
 }
