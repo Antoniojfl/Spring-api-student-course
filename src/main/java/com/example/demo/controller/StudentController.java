@@ -73,14 +73,20 @@ public class StudentController {
 	@GetMapping("/sp/{saludo}")
 	@ResponseBody
 	public List <Object[]> saludo(@PathVariable(value = "saludo") String saludo) {
+		
 		return this.service.sp_student(saludo);
 	}
 	
-	@GetMapping("/cursor/{cursor}/{age}")
+	@GetMapping("/cursor/{age}")
 	@ResponseBody
-	public List <Object[]> getStudendAge(@PathVariable(value = "cursor") String cursor, @PathVariable(value="age") Integer age) {
-		return this.service.sp_student(cursor, age);
+	public ResponseEntity<List<?>> getStudentAge(@PathVariable(value = "age")Integer age) {
+		
+		List <?> result = this.service.sp_course(age);
+		 return new ResponseEntity<>(result, HttpStatus.OK);
+		 
 	}
+	
+	
 	
 	
 

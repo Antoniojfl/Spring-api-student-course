@@ -1,23 +1,34 @@
 package com.example.demo.services;
 
+
 import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.models.Student;
 import com.example.demo.repositories.StudentRepository;
 
 @Service
 public class StudentServiceImp implements StudentService{
-	
+
+	private EntityManager entityManager;
 	private StudentRepository repository;
+
 	
-	public StudentServiceImp(StudentRepository repository) {
+	public StudentServiceImp(StudentRepository repository, EntityManager entityManager) {
 		this.repository = repository;
+		this.entityManager = entityManager;
 	}
+	
+	
 
 	@Override
 	public Iterable<Student> findAll() {
@@ -64,9 +75,20 @@ public class StudentServiceImp implements StudentService{
 		return repository.sp_student(saludo);
 	}
 
+	
 	@Override
-	public List<Object[]> sp_student(String cursor, Integer age) {
-		return repository.sp_cursor(cursor, age);
+	@Transactional
+	public List<?> sp_course(Integer age){
+				 StoredProcedureQuery query = entityManager
+				.createStoredProcedureQuery("antonio.sp_cursor")
+				.registerStoredProcedureParameter(1,void.class,ParameterMode.REF_CURSOR)
+				.registerStoredProcedureParameter(2,Integer.class,ParameterMode.IN)
+				.setParameter(2, age);
+				 
+		List<?> postComments = query.getResultList();
+			System.out.print(postComments);
+			return postComments;
 	}
+	
 
 }

@@ -23,7 +23,7 @@ public interface StudentService {
 	
 	List <Object[]> sp_student(String saludo);
 	
-	List <Object[]> sp_student(String cursor, Integer age);
+	List<?> sp_course(Integer age);
 	
 
 }

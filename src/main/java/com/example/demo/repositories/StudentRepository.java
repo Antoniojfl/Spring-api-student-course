@@ -2,6 +2,8 @@ package com.example.demo.repositories;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -18,8 +20,11 @@ public interface StudentRepository extends PagingAndSortingRepository<Student,In
 	@Query(value = "select antonio.sp_student(:saludo)", nativeQuery = true)
     public List<Object[]> sp_student(@Param("saludo") String saludo);
     
-    @Query(value = "begin; select antonio.sp_cursor(:mycursor, :age); fetch all in \"mycursor\"", nativeQuery = true)
-    public List<Object[]> sp_cursor(@Param("mycursor") String cursor, @Param("age") Integer age);
+    
+    //@Query(value = "select antonio.sp_cursor(:age)", nativeQuery = true)
+    //public List<Object[]> sp_cursor(@Param("age") Integer age);
+    
+    
 
     
 }

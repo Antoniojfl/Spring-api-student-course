@@ -6,24 +6,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedStoredProcedureQuery;
-import javax.persistence.ParameterMode;
-import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 import com.example.demo.validators.ValidRut;
 
 @Entity
 @Table (name= "Student")
-/*@NamedStoredProcedureQuery(
-	name = "sp_student",
-	procedureName = "antonio.sp_student",
-	parameters = {
-			@StoredProcedureParameter(name = "saludo",mode= ParameterMode.IN,type = String.class)
-	}
-	
-)*/
 public class Student {
+	
+	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
